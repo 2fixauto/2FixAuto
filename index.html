@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2FIX AUTO UF – mindre lackskador, 2:or inför besiktning, däckbyten och polering.">
+  <title>2FIX AUTO UF | Bilservice & Bilvård</title>
+  <style>
+    :root{
+      --red:#e50914;
+      --red2:#ff2733;
+      --black:#050505;
+      --dark:#101010;
+      --dark2:#171717;
+      --white:#fff;
+      --muted:#bdbdbd;
+      --line:#292929;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--black);
+      color:var(--white);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:rgba(5,5,5,.92);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    nav{
+      height:76px;display:flex;align-items:center;justify-content:space-between;
+    }
+    .logo{
+      font-size:1.55rem;font-weight:900;letter-spacing:1px;
+      font-style:italic;
+    }
+    .logo span{color:var(--red)}
+    .logo small{display:block;font-size:.55rem;letter-spacing:3px;color:#aaa;font-style:normal}
+    .navlinks{display:flex;gap:28px;align-items:center}
+    .navlinks a{color:#ddd;font-weight:700;font-size:.95rem}
+    .navlinks a:hover{color:var(--red)}
+    .btn{
+      display:inline-block;background:var(--red);color:#fff;
+      padding:13px 22px;border-radius:7px;font-weight:900;
+      border:1px solid var(--red);transition:.2s;cursor:pointer;
+    }
+    .btn:hover{background:transparent;color:var(--red)}
+    .btn-outline{background:transparent;border-color:#555}
+    .btn-outline:hover{background:var(--white);color:#000;border-color:#fff}
+    .hero{
+      min-height:760px;padding:150px 0 90px;
+      display:flex;align-items:center;
+      background:
+        radial-gradient(circle at 78% 35%,rgba(229,9,20,.2),transparent 28%),
+        linear-gradient(115deg,#050505 50%,#110606 100%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+    .eyebrow{color:var(--red2);font-weight:900;letter-spacing:3px;text-transform:uppercase}
+    h1{font-size:clamp(3rem,7vw,6.2rem);line-height:.92;margin:15px 0 24px;font-weight:950}
+    h1 span{color:var(--red)}
+    .hero p{font-size:1.18rem;color:#ccc;max-width:650px}
+    .actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+    .hero-card{
+      min-height:390px;border:1px solid #333;border-radius:22px;
+      background:linear-gradient(145deg,#171717,#070707);
+      display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+      box-shadow:0 25px 80px rgba(0,0,0,.55);
+    }
+    .car{
+      font-size:10rem;filter:drop-shadow(0 15px 20px rgba(229,9,20,.25));
+      transform:skewX(-8deg);
+    }
+    .speedline{position:absolute;height:4px;background:var(--red);border-radius:5px;opacity:.8}
+    .s1{width:65%;top:22%;right:-10%;transform:rotate(-8deg)}
+    .s2{width:45%;top:32%;right:2%;transform:rotate(-8deg)}
+    section{padding:95px 0}
+    .section-title{text-align:center;margin-bottom:48px}
+    .section-title .eyebrow{font-size:.8rem}
+    h2{font-size:clamp(2rem,4vw,3.3rem);margin-top:7px}
+    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .service{
+      background:var(--dark);border:1px solid var(--line);border-radius:14px;
+      padding:28px 22px;min-height:250px;transition:.2s;
+    }
+    .service:hover{transform:translateY(-5px);border-color:var(--red)}
+    .icon{font-size:2.5rem;margin-bottom:18px}
+    .service h3{font-size:1.15rem;margin-bottom:9px}
+    .service p{color:#aaa;font-size:.95rem}
+    .price{color:var(--red2);font-weight:900;margin-top:16px}
+    .booking-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px}
+    .info,.form{
+      background:var(--dark);border:1px solid var(--line);border-radius:16px;padding:30px;
+    }
+    .info h3{font-size:1.5rem;margin-bottom:12px}
+    .info p{color:#aaa;margin-bottom:22px}
+    .contact-line{padding:14px 0;border-bottom:1px solid var(--line)}
+    .contact-line:last-child{border-bottom:0}
+    form{display:grid;gap:15px}
+    label{font-weight:800;font-size:.9rem}
+    input,select,textarea{
+      width:100%;margin-top:7px;background:#080808;color:#fff;
+      border:1px solid #383838;border-radius:8px;padding:13px 14px;font:inherit;
+    }
+    input:focus,select:focus,textarea:focus{outline:2px solid var(--red);border-color:var(--red)}
+    textarea{min-height:120px;resize:vertical}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .notice{
+      display:none;margin-top:10px;padding:13px;border-radius:8px;
+      background:#0d2812;border:1px solid #245d2d;color:#b8f0c0;
+    }
+    .about{
+      background:linear-gradient(90deg,#100505,#080808);
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    }
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+    .checks{display:grid;gap:12px;margin-top:20px}
+    .checks div{color:#ddd}.checks span{color:var(--red);font-weight:900;margin-right:8px}
+    footer{padding:45px 0;border-top:1px solid var(--line);color:#888}
+    .footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .mobile-menu{display:none}
+    @media(max-width:850px){
+      .navlinks{display:none}.mobile-menu{display:block}
+      .hero-grid,.booking-wrap,.about-grid{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr 1fr}
+      .hero{min-height:auto}
+    }
+    @media(max-width:520px){
+      .services{grid-template-columns:1fr}.two{grid-template-columns:1fr}
+      h1{font-size:3.4rem}.hero-card{min-height:260px}.car{font-size:6rem}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#hem" class="logo"><span>2</span>FIX AUTO<small>UF</small></a>
+      <div class="navlinks">
+        <a href="#tjanster">Tjänster</a>
+        <a href="#omoss">Om oss</a>
+        <a href="#boka">Boka tid</a>
+        <a href="#kontakt">Kontakt</a>
+        <a class="btn" href="#boka">BOKA TID</a>
+      </div>
+      <a class="btn mobile-menu" href="#boka">BOKA</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="hem">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">2FIX AUTO UF</div>
+        <h1>VI FIXAR DET LILLA SOM GÖR <span>STOR</span> SKILLNAD.</h1>
+        <p>Små lackskador, 2:or inför besiktning, däckbyten och polering – enkelt, smidigt och med fokus på ett snyggt resultat.</p>
+        <div class="actions">
+          <a class="btn" href="#boka">Boka en tid</a>
+          <a class="btn btn-outline" href="#tjanster">Se våra tjänster</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="2FIX AUTO">
+        <div class="speedline s1"></div><div class="speedline s2"></div>
+        <div class="car">🚘</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tjanster">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Vad vi gör</div>
+        <h2>Våra tjänster</h2>
+      </div>
+      <div class="services">
+        <article class="service">
+          <div class="icon">🎨</div>
+          <h3>Mindre lackskador</h3>
+          <p>Vi hjälper till med mindre repor, märken och andra enklare lackskador.</p>
+          <div class="price">Begär offert</div>
+        </article>
+        <article class="service">
+          <div class="icon">🔧</div>
+          <h3>2:or inför besiktning</h3>
+          <p>Vi åtgärdar enklare fel så att bilen kan bli redo inför ombesiktningen.</p>
+          <div class="price">Begär offert</div>
+        </article>
+        <article class="service">
+          <div class="icon">🛞</div>
+          <h3>Däckbyten</h3>
+          <p>Snabbt och smidigt däckbyte när det är dags att byta säsong.</p>
+          <div class="price">Begär pris</div>
+        </article>
+        <article class="service">
+          <div class="icon">✨</div>
+          <h3>Polering</h3>
+          <p>Ge bilen mer glans och ett fräschare utseende med professionell polering.</p>
+          <div class="price">Begär offert</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="omoss">
+    <div class="container about-grid">
+      <div>
+        <div class="eyebrow">2FIX AUTO UF</div>
+        <h2>Enklare bilvård. Bättre känsla.</h2>
+        <p style="color:#aaa;margin-top:16px">Vi är ett UF-företag som erbjuder praktiska och prisvärda tjänster för dig som vill hålla bilen fräsch och få ordning på mindre problem.</p>
+        <div class="checks">
+          <div><span>✓</span> Enkel bokning</div>
+          <div><span>✓</span> Tydlig kommunikation</div>
+          <div><span>✓</span> Fokus på ett snyggt resultat</div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="car">🏎️</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="boka">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Boka online</div>
+        <h2>Boka en tid</h2>
+      </div>
+      <div class="booking-wrap">
+        <div class="info">
+          <h3>Så fungerar det</h3>
+          <p>Välj tjänst och önskat datum. Fyll sedan i dina kontaktuppgifter så hör vi av oss och bekräftar tiden.</p>
+          <div class="contact-line">📞 <strong>Mobil:</strong> <span id="phoneText">073-148 05 06</span></div>
+          <div class="contact-line">✉️ <strong>E-post:</strong> wille.09@hotmail.com</div>
+          <div class="contact-line">📍 <strong>Ort:</strong> Torsås</div>
+          <div style="margin-top:22px;color:#777;font-size:.85rem">Kontaktuppgifterna är uppdaterade. Byt bara ut "Torsås" mot er riktiga ort innan publicering.</div>
+        </div>
+
+        <div class="form">
+          <form id="bookingForm">
+            <div>
+              <label for="service">Tjänst *</label>
+              <select id="service" required>
+                <option value="">Välj tjänst</option>
+                <option>Mindre lackskador</option>
+                <option>2:or inför besiktning</option>
+                <option>Däckbyte</option>
+                <option>Polering</option>
+              </select>
+            </div>
+            <div class="two">
+              <div>
+                <label for="date">Önskat datum *</label>
+                <input id="date" type="date" required>
+              </div>
+              <div>
+                <label for="time">Önskad tid *</label>
+                <input id="time" type="time" required>
+              </div>
+            </div>
+            <div class="two">
+              <div>
+                <label for="name">Namn *</label>
+                <input id="name" type="text" placeholder="Ditt namn" required>
+              </div>
+              <div>
+                <label for="phone">Mobilnummer *</label>
+                <input id="phone" type="tel" placeholder="073-148 05 06" required>
+              </div>
+            </div>
+            <div>
+              <label for="message">Meddelande</label>
+              <textarea id="message" placeholder="Beskriv gärna bilen eller vad du behöver hjälp med..."></textarea>
+            </div>
+            <button class="btn" type="submit">SKICKA BOKNINGSFÖRFRÅGAN</button>
+            <div class="notice" id="notice">Tack! Bokningsförfrågan är skapad. Nu behöver ni koppla formuläret till e-post eller ett bokningssystem för att ta emot den automatiskt.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Kontakta oss</div>
+        <h2>Redo att boka?</h2>
+        <p style="color:#aaa;margin-top:10px">Ring, mejla eller skicka en bokningsförfrågan.</p>
+      </div>
+      <div style="text-align:center">
+        <a class="btn" href="tel:+46731480506">📞 RING OSS</a>
+        <a class="btn btn-outline" href="mailto:wille.09@hotmail.com" style="margin-left:8px">✉️ MEJLA OSS</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><strong style="color:#fff">2FIX AUTO UF</strong><br>Bilservice & bilvård</div>
+    <div>© <span id="year"></span> 2FIX AUTO UF</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const dateInput = document.getElementById("date");
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth()+1).padStart(2,"0");
+  const dd = String(today.getDate()).padStart(2,"0");
+  dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+  document.getElementById("bookingForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("notice").style.display = "block";
+    this.querySelector("button").textContent = "BOKNINGSFÖRFRÅGAN SKICKAD";
+  });
+</script>
+</body>
+</html>
