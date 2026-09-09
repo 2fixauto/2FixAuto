@@ -1,939 +1,1008 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="2FIX AUTO UF – mindre lackskador, 2:or inför besiktning, däckbyten och polering.">
-  <title>2FIX AUTO UF | Bilservice & Bilvård</title>
-
-  <style>
-    :root{
-      --red:#e50914;
-      --red2:#ff2733;
-      --black:#050505;
-      --dark:#101010;
-      --dark2:#171717;
-      --white:#fff;
-      --muted:#bdbdbd;
-      --line:#292929;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:Arial,Helvetica,sans-serif;
-      background:var(--black);
-      color:var(--white);
-      line-height:1.6;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    .container{
-      width:min(1120px,92%);
-      margin:auto;
-    }
-
-    header{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      z-index:1000;
-      background:rgba(5,5,5,.92);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-
-    nav{
-      height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .logo{
-      font-size:1.55rem;
-      font-weight:900;
-      letter-spacing:1px;
-      font-style:italic;
-    }
-
-    .logo span{
-      color:var(--red);
-    }
-
-    .logo small{
-      display:block;
-      font-size:.55rem;
-      letter-spacing:3px;
-      color:#aaa;
-      font-style:normal;
-    }
-
-    .navlinks{
-      display:flex;
-      gap:28px;
-      align-items:center;
-    }
-
-    .navlinks a{
-      color:#ddd;
-      font-weight:700;
-      font-size:.95rem;
-    }
-
-    .navlinks a:hover{
-      color:var(--red);
-    }
-
-    .btn{
-      display:inline-block;
-      background:var(--red);
-      color:#fff;
-      padding:13px 22px;
-      border-radius:7px;
-      font-weight:900;
-      border:1px solid var(--red);
-      transition:.2s;
-      cursor:pointer;
-    }
-
-    .btn:hover{
-      background:transparent;
-      color:var(--red);
-    }
-
-    .btn-outline{
-      background:transparent;
-      border-color:#555;
-    }
-
-    .btn-outline:hover{
-      background:var(--white);
-      color:#000;
-      border-color:#fff;
-    }
-
-    .hero{
-      min-height:760px;
-      padding:150px 0 90px;
-      display:flex;
-      align-items:center;
-      background:
-        radial-gradient(circle at 78% 35%,rgba(229,9,20,.2),transparent 28%),
-        linear-gradient(115deg,#050505 50%,#110606 100%);
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:50px;
-      align-items:center;
-    }
-
-    .eyebrow{
-      color:var(--red2);
-      font-weight:900;
-      letter-spacing:3px;
-      text-transform:uppercase;
-    }
-
-    h1{
-      font-size:clamp(3rem,7vw,6.2rem);
-      line-height:.92;
-      margin:15px 0 24px;
-      font-weight:950;
-    }
-
-    h1 span{
-      color:var(--red);
-    }
-
-    .hero p{
-      font-size:1.18rem;
-      color:#ccc;
-      max-width:650px;
-    }
-
-    .actions{
-      display:flex;
-      gap:14px;
-      margin-top:30px;
-      flex-wrap:wrap;
-    }
-
-    .hero-card{
-      min-height:390px;
-      border:1px solid #333;
-      border-radius:22px;
-      background:linear-gradient(145deg,#171717,#070707);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-      box-shadow:0 25px 80px rgba(0,0,0,.55);
-    }
-
-    .car{
-      font-size:10rem;
-      filter:drop-shadow(0 15px 20px rgba(229,9,20,.25));
-      transform:skewX(-8deg);
-    }
-
-    .speedline{
-      position:absolute;
-      height:4px;
-      background:var(--red);
-      border-radius:5px;
-      opacity:.8;
-    }
-
-    .s1{
-      width:65%;
-      top:22%;
-      right:-10%;
-      transform:rotate(-8deg);
-    }
-
-    .s2{
-      width:45%;
-      top:32%;
-      right:2%;
-      transform:rotate(-8deg);
-    }
-
-    section{
-      padding:95px 0;
-    }
-
-    .section-title{
-      text-align:center;
-      margin-bottom:48px;
-    }
-
-    .section-title .eyebrow{
-      font-size:.8rem;
-    }
-
-    h2{
-      font-size:clamp(2rem,4vw,3.3rem);
-      margin-top:7px;
-    }
-
-    .services{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-    }
-
-    .service{
-      background:var(--dark);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:28px 22px;
-      min-height:250px;
-      transition:.2s;
-    }
-
-    .service:hover{
-      transform:translateY(-5px);
-      border-color:var(--red);
-    }
-
-    .icon{
-      font-size:2.5rem;
-      margin-bottom:18px;
-    }
-
-    .service h3{
-      font-size:1.15rem;
-      margin-bottom:9px;
-    }
-
-    .service p{
-      color:#aaa;
-      font-size:.95rem;
-    }
-
-    .price{
-      color:var(--red2);
-      font-weight:900;
-      margin-top:16px;
-    }
-
-    .price-note{
-      text-align:center;
-      color:#999;
-      font-size:.85rem;
-      margin-top:28px;
-    }
-
-    .booking-wrap{
-      display:grid;
-      grid-template-columns:.8fr 1.2fr;
-      gap:28px;
-    }
-
-    .info,
-    .form{
-      background:var(--dark);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:30px;
-    }
-
-    .info h3{
-      font-size:1.5rem;
-      margin-bottom:12px;
-    }
-
-    .info p{
-      color:#aaa;
-      margin-bottom:22px;
-    }
-
-    .contact-line{
-      padding:14px 0;
-      border-bottom:1px solid var(--line);
-    }
-
-    .contact-line:last-child{
-      border-bottom:0;
-    }
-
-    .contact-line a{
-      color:#fff;
-    }
-
-    .contact-line a:hover{
-      color:var(--red2);
-    }
-
-    form{
-      display:grid;
-      gap:15px;
-    }
-
-    label{
-      font-weight:800;
-      font-size:.9rem;
-    }
-
-    input,
-    select,
-    textarea{
-      width:100%;
-      margin-top:7px;
-      background:#080808;
-      color:#fff;
-      border:1px solid #383838;
-      border-radius:8px;
-      padding:13px 14px;
-      font:inherit;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus{
-      outline:2px solid var(--red);
-      border-color:var(--red);
-    }
-
-    textarea{
-      min-height:120px;
-      resize:vertical;
-    }
-
-    .two{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .notice{
-      display:none;
-      margin-top:10px;
-      padding:13px;
-      border-radius:8px;
-      background:#0d2812;
-      border:1px solid #245d2d;
-      color:#b8f0c0;
-    }
-
-    .about{
-      background:linear-gradient(90deg,#100505,#080808);
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-    }
-
-    .about-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:40px;
-      align-items:center;
-    }
-
-    .checks{
-      display:grid;
-      gap:12px;
-      margin-top:20px;
-    }
-
-    .checks div{
-      color:#ddd;
-    }
-
-    .checks span{
-      color:var(--red);
-      font-weight:900;
-      margin-right:8px;
-    }
-
-    footer{
-      padding:45px 0;
-      border-top:1px solid var(--line);
-      color:#888;
-    }
-
-    .footer-grid{
-      display:flex;
-      justify-content:space-between;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .mobile-menu{
-      display:none;
-    }
-
-    @media(max-width:850px){
-      .navlinks{
-        display:none;
-      }
-
-      .mobile-menu{
-        display:block;
-      }
-
-      .hero-grid,
-      .booking-wrap,
-      .about-grid{
-        grid-template-columns:1fr;
-      }
-
-      .services{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .hero{
-        min-height:auto;
-      }
-    }
-
-    @media(max-width:520px){
-      .services{
-        grid-template-columns:1fr;
-      }
-
-      .two{
-        grid-template-columns:1fr;
-      }
-
-      h1{
-        font-size:3.4rem;
-      }
-
-      .hero-card{
-        min-height:260px;
-      }
-
-      .car{
-        font-size:6rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>2FIX AUTO UF | Torsås</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #050505;
+            border-bottom: 2px solid #e10600;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #e10600;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e10600;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.72),
+                    rgba(0,0,0,0.92)
+                ),
+                #111111;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        .hero h1 span {
+            color: #e10600;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .btn {
+            display: inline-block;
+            background: #e10600;
+            color: #ffffff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #b80500;
+            transform: scale(1.03);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: #e10600;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            background: #151515;
+            border: 1px solid #333333;
+            border-left: 4px solid #e10600;
+            padding: 30px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #e10600;
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #bbbbbb;
+            margin-bottom: 15px;
+        }
+
+        .service-card span {
+            color: #e10600;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+            background: #111111;
+        }
+
+        .about-text {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            color: #cccccc;
+            font-size: 18px;
+        }
+
+        /* =========================
+           BOOKING
+        ========================= */
+
+        .booking {
+            background: #080808;
+        }
+
+        form {
+            max-width: 700px;
+            margin: auto;
+            background: #151515;
+            padding: 35px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 20px;
+            background: #0b0b0b;
+            border: 1px solid #444444;
+            color: #ffffff;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #e10600;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================= */
+
+        .success-message {
+            display: none;
+            background: #123d19;
+            border: 1px solid #2ecc40;
+            color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error-message {
+            display: none;
+            background: #4a1111;
+            border: 1px solid #e10600;
+            color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+            background: #111111;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-box {
+            background: #151515;
+            padding: 25px 35px;
+            border-radius: 8px;
+            border: 1px solid #333333;
+            min-width: 240px;
+        }
+
+        .contact-box h3 {
+            color: #e10600;
+            margin-bottom: 8px;
+        }
+
+        .contact-box a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            color: #e10600;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #050505;
+            text-align: center;
+            padding: 25px;
+            color: #777777;
+            border-top: 1px solid #222222;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            .nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 7px;
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            form {
+                padding: 25px;
+            }
+
+            .contact-info {
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container">
-    <nav>
-      <a href="#hem" class="logo">
-        <span>2</span>FIX AUTO
-        <small>UF</small>
-      </a>
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-      <div class="navlinks">
-        <a href="#tjanster">Tjänster</a>
-        <a href="#omoss">Om oss</a>
-        <a href="#boka">Boka tid</a>
-        <a href="#kontakt">Kontakt</a>
-        <a class="btn" href="#boka">BOKA TID</a>
-      </div>
+    <header>
+        <div class="nav">
 
-      <a class="btn mobile-menu" href="#boka">BOKA</a>
-    </nav>
-  </div>
-</header>
+            <div class="logo">
+                2FIX <span>AUTO UF</span>
+            </div>
 
-<main>
+            <nav>
+                <a href="#hem">Hem</a>
+                <a href="#tjanster">Tjänster</a>
+                <a href="#omoss">Om oss</a>
+                <a href="#bokning">Boka tid</a>
+                <a href="#kontakt">Kontakt</a>
+            </nav>
 
-  <section class="hero" id="hem">
-    <div class="container hero-grid">
+        </div>
+    </header>
 
-      <div>
-        <div class="eyebrow">2FIX AUTO UF</div>
 
-        <h1>
-          VI FIXAR DET LILLA SOM GÖR
-          <span>STOR</span> SKILLNAD.
-        </h1>
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero" id="hem">
+
+        <div>
+
+            <h1>
+                2FIX <span>AUTO UF</span>
+            </h1>
+
+            <p>
+                Bilvård och enklare bilservice i Torsås
+            </p>
+
+            <a href="#bokning" class="btn">
+                BOKA TID
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TJÄNSTER
+    ========================= -->
+
+    <section id="tjanster">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                VÅRA <span>TJÄNSTER</span>
+            </h2>
+
+
+            <div class="services">
+
+
+                <!-- Lackskador -->
+
+                <div class="service-card">
+
+                    <h3>
+                        🎨 Mindre lackskador
+                    </h3>
+
+                    <p>
+                        Vi hjälper till med mindre lackskador
+                        och gör bilen snyggare igen.
+                    </p>
+
+                    <span>
+                        Från 400 kr
+                    </span>
+
+                </div>
+
+
+                <!-- Besiktning -->
+
+                <div class="service-card">
+
+                    <h3>
+                        🔧 2:or inför besiktning
+                    </h3>
+
+                    <p>
+                        Vi hjälper dig att åtgärda enklare fel
+                        inför ombesiktning.
+                    </p>
+
+                    <span>
+                        Från 400 kr
+                    </span>
+
+                </div>
+
+
+                <!-- Däckbyte -->
+
+                <div class="service-card">
+
+                    <h3>
+                        🚗 Däckbyten
+                    </h3>
+
+                    <p>
+                        Snabbt och smidigt byte av dina däck.
+                    </p>
+
+                    <span>
+                        180 kr
+                    </span>
+
+                </div>
+
+
+                <!-- 3-stegs polering -->
+
+                <div class="service-card">
+
+                    <h3>
+                        ✨ 3-stegs polering
+                    </h3>
+
+                    <p>
+                        3-stegs polering som ger bilen bättre
+                        glans och en snyggare finish.
+                    </p>
+
+                    <span>
+                        Från 800 kr
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         OM OSS
+    ========================= -->
+
+    <section class="about" id="omoss">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                OM <span>OSS</span>
+            </h2>
+
+            <p class="about-text">
+
+                Vi på 2FIX AUTO UF erbjuder enklare
+                bilservice och bilvård i Torsås.
+
+                Vårt mål är att ge våra kunder ett bra
+                resultat, bra service och ett pris som
+                känns rimligt.
+
+                <br><br>
+
+                Oavsett om du behöver hjälp med
+                däckbyte, 3-stegs polering, mindre
+                lackskador eller enklare fel inför
+                besiktningen är du välkommen att
+                kontakta oss.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BOKA TID
+    ========================= -->
+
+    <section class="booking" id="bokning">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                BOKA <span>TID</span>
+            </h2>
+
+
+            <form id="bookingForm">
+
+
+                <!-- Lyckat meddelande -->
+
+                <div
+                    class="success-message"
+                    id="successMessage"
+                >
+                    Tack! Din bokningsförfrågan är skickad.
+                    Vi återkommer så snart som möjligt.
+                </div>
+
+
+                <!-- Felmeddelande -->
+
+                <div
+                    class="error-message"
+                    id="errorMessage"
+                >
+                    Något gick fel. Försök igen eller kontakta
+                    oss direkt via telefon.
+                </div>
+
+
+                <!-- Tjänst -->
+
+                <label for="service">
+                    Välj tjänst
+                </label>
+
+                <select
+                    id="service"
+                    name="Tjänst"
+                    required
+                >
+
+                    <option value="">
+                        Välj en tjänst
+                    </option>
+
+                    <option value="Mindre lackskador">
+                        Mindre lackskador – från 400 kr
+                    </option>
+
+                    <option value="2:or inför besiktning">
+                        2:or inför besiktning – från 400 kr
+                    </option>
+
+                    <option value="Däckbyte">
+                        Däckbyte – 180 kr
+                    </option>
+
+                    <option value="3-stegs polering">
+                        3-stegs polering – från 800 kr
+                    </option>
+
+                </select>
+
+
+                <!-- Datum -->
+
+                <label for="date">
+                    Önskat datum
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    name="Datum"
+                    required
+                >
+
+
+                <!-- Tid -->
+
+                <label for="time">
+                    Önskad tid
+                </label>
+
+                <input
+                    type="time"
+                    id="time"
+                    name="Tid"
+                    required
+                >
+
+
+                <!-- Namn -->
+
+                <label for="name">
+                    Namn
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="Namn"
+                    placeholder="Ditt namn"
+                    required
+                >
+
+
+                <!-- Telefon -->
+
+                <label for="phone">
+                    Telefonnummer
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="Telefon"
+                    placeholder="Ditt telefonnummer"
+                    required
+                >
+
+
+                <!-- Meddelande -->
+
+                <label for="message">
+                    Meddelande
+                </label>
+
+                <textarea
+                    id="message"
+                    name="Meddelande"
+                    placeholder="Skriv gärna lite mer om vad du behöver hjälp med..."
+                ></textarea>
+
+
+                <!-- Skicka -->
+
+                <button
+                    type="submit"
+                    class="btn"
+                    id="submitButton"
+                >
+                    SKICKA BOKNINGSFÖRFRÅGAN
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         KONTAKT
+    ========================= -->
+
+    <section class="contact" id="kontakt">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                <span>KONTAKTA</span> OSS
+            </h2>
+
+
+            <div class="contact-info">
+
+
+                <!-- Telefon -->
+
+                <div class="contact-box">
+
+                    <h3>
+                        📞 Telefon
+                    </h3>
+
+                    <p>
+                        <a href="tel:0731480506">
+                            073-148 05 06
+                        </a>
+                    </p>
+
+                    <p>
+                        <a href="tel:0762508703">
+                            076-250 87 03
+                        </a>
+                    </p>
+
+                </div>
+
+
+                <!-- E-post -->
+
+                <div class="contact-box">
+
+                    <h3>
+                        📧 E-post
+                    </h3>
+
+                    <p>
+                        <a href="mailto:info.2fixauto@gmail.com">
+                            info.2fixauto@gmail.com
+                        </a>
+                    </p>
+
+                </div>
+
+
+                <!-- Ort -->
+
+                <div class="contact-box">
+
+                    <h3>
+                        📍 Ort
+                    </h3>
+
+                    <p>
+                        Torsås
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
 
         <p>
-          Små lackskador, 2:or inför besiktning, däckbyten och polering –
-          enkelt, smidigt och med fokus på ett snyggt resultat.
+            © <span id="year"></span>
+            2FIX AUTO UF – Torsås
         </p>
 
-        <div class="actions">
-          <a class="btn" href="#boka">Boka en tid</a>
-          <a class="btn btn-outline" href="#tjanster">Se våra tjänster</a>
-        </div>
-      </div>
-
-      <div class="hero-card" aria-label="2FIX AUTO">
-        <div class="speedline s1"></div>
-        <div class="speedline s2"></div>
-        <div class="car">🚘</div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <section id="tjanster">
-    <div class="container">
-
-      <div class="section-title">
-        <div class="eyebrow">Vad vi gör</div>
-        <h2>Våra tjänster</h2>
-      </div>
-
-      <div class="services">
-
-        <article class="service">
-          <div class="icon">🎨</div>
-          <h3>Mindre lackskador</h3>
-          <p>
-            Vi hjälper till med mindre repor, märken och andra enklare lackskador.
-          </p>
-          <div class="price">Från 400 kr</div>
-        </article>
-
-        <article class="service">
-          <div class="icon">🔧</div>
-          <h3>2:or inför besiktning</h3>
-          <p>
-            Vi åtgärdar enklare fel så att bilen kan bli redo inför ombesiktningen.
-          </p>
-          <div class="price">Från 400 kr</div>
-        </article>
-
-        <article class="service">
-          <div class="icon">🛞</div>
-          <h3>Däckbyten</h3>
-          <p>
-            Snabbt och smidigt däckbyte när det är dags att byta säsong.
-          </p>
-          <div class="price">350 kr</div>
-        </article>
+    </footer>
 
-        <article class="service">
-          <div class="icon">✨</div>
-          <h3>Polering</h3>
-          <p>
-            Ge bilen mer glans och ett fräschare utseende med professionell polering.
-          </p>
-          <div class="price">Från 800 kr</div>
-        </article>
-
-      </div>
-
-      <div class="price-note">
-        * Från-priser kan variera beroende på bilens skick och arbetets omfattning.
-        Pris lämnas innan arbetet påbörjas.
-      </div>
-
-    </div>
-  </section>
-
-
-  <section class="about" id="omoss">
-    <div class="container about-grid">
-
-      <div>
-        <div class="eyebrow">2FIX AUTO UF</div>
-
-        <h2>Enklare bilvård. Bättre känsla.</h2>
-
-        <p style="color:#aaa;margin-top:16px">
-          Vi är ett UF-företag som erbjuder praktiska och prisvärda tjänster
-          för dig som vill hålla bilen fräsch och få ordning på mindre problem.
-        </p>
-
-        <div class="checks">
-          <div><span>✓</span> Enkel bokning</div>
-          <div><span>✓</span> Tydlig kommunikation</div>
-          <div><span>✓</span> Fokus på ett snyggt resultat</div>
-        </div>
-      </div>
-
-      <div class="hero-card">
-        <div class="car">🏎️</div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <section id="boka">
-    <div class="container">
 
-      <div class="section-title">
-        <div class="eyebrow">Boka online</div>
-        <h2>Boka en tid</h2>
-      </div>
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
-      <div class="booking-wrap">
+    <script>
 
-        <div class="info">
+        /* =========================
+           ÅRTAL
+        ========================= */
 
-          <h3>Så fungerar det</h3>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
 
-          <p>
-            Välj tjänst och önskat datum. Fyll sedan i dina kontaktuppgifter
-            så hör vi av oss och bekräftar tiden.
-          </p>
-
-          <div class="contact-line">
-            📞 <strong>Mobil 1:</strong>
-            <a href="tel:+46731480506">073-148 05 06</a>
-          </div>
 
-          <div class="contact-line">
-            📞 <strong>Mobil 2:</strong>
-            <a href="tel:+46762508703">076-250 87 03</a>
-          </div>
+        /* =========================
+           MINSTA BOKNINGSDATUM
+        ========================= */
 
-          <div class="contact-line">
-            ✉️ <strong>E-post:</strong>
-            <a href="mailto:info.2fixauto@gmail.com">
-              info.2fixauto@gmail.com
-            </a>
-          </div>
+        const dateInput =
+            document.getElementById("date");
 
-          <div class="contact-line">
-            📍 <strong>Ort:</strong> Torsås
-          </div>
+        const today = new Date();
 
-        </div>
+        const year =
+            today.getFullYear();
 
+        const month =
+            String(today.getMonth() + 1)
+            .padStart(2, "0");
 
-        <div class="form">
+        const day =
+            String(today.getDate())
+            .padStart(2, "0");
 
-          <form id="bookingForm">
+        dateInput.min =
+            `${year}-${month}-${day}`;
 
-            <div>
-              <label for="service">Tjänst *</label>
 
-              <select id="service" name="service" required>
-                <option value="">Välj tjänst</option>
-                <option value="Mindre lackskador">
-                  Mindre lackskador
-                </option>
-                <option value="2:or inför besiktning">
-                  2:or inför besiktning
-                </option>
-                <option value="Däckbyte">
-                  Däckbyte
-                </option>
-                <option value="Polering">
-                  Polering
-                </option>
-              </select>
-            </div>
+        /* =========================
+           FORMULÄR
+        ========================= */
 
+        const form =
+            document.getElementById("bookingForm");
 
-            <div class="two">
+        const submitButton =
+            document.getElementById("submitButton");
 
-              <div>
-                <label for="date">Önskat datum *</label>
+        const successMessage =
+            document.getElementById("successMessage");
 
-                <input
-                  id="date"
-                  name="date"
-                  type="date"
-                  required
-                >
-              </div>
+        const errorMessage =
+            document.getElementById("errorMessage");
 
-              <div>
-                <label for="time">Önskad tid *</label>
 
-                <input
-                  id="time"
-                  name="time"
-                  type="time"
-                  required
-                >
-              </div>
+        /* =========================
+           SKICKA FORMULÄR
+        ========================= */
 
-            </div>
+        form.addEventListener(
+            "submit",
+            async function(event) {
 
+                event.preventDefault();
 
-            <div class="two">
 
-              <div>
-                <label for="name">Namn *</label>
+                /* Dölj gamla meddelanden */
 
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Ditt namn"
-                  required
-                >
-              </div>
+                successMessage.style.display =
+                    "none";
 
-              <div>
-                <label for="phone">Mobilnummer *</label>
+                errorMessage.style.display =
+                    "none";
 
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="073-148 05 06"
-                  required
-                >
-              </div>
 
-            </div>
+                /* Ändra knapp */
 
+                submitButton.disabled =
+                    true;
 
-            <div>
-              <label for="message">Meddelande</label>
+                submitButton.textContent =
+                    "SKICKAR...";
 
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Beskriv gärna bilen eller vad du behöver hjälp med..."
-              ></textarea>
-            </div>
 
+                /* Hämta formulärdata */
 
-            <button class="btn" type="submit">
-              SKICKA BOKNINGSFÖRFRÅGAN
-            </button>
+                const formData =
+                    new FormData(form);
 
 
-            <div class="notice" id="notice">
-              Tack! Din bokningsförfrågan är skickad.
-              Vi återkommer så snart som möjligt.
-            </div>
+                try {
 
-          </form>
+                    const response =
+                        await fetch(
+                            "https://formspree.io/f/mwlkwrol",
+                            {
+                                method: "POST",
 
-        </div>
+                                body: formData,
 
-      </div>
-    </div>
-  </section>
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                }
+                            }
+                        );
 
 
-  <section id="kontakt">
-    <div class="container">
+                    /* =========================
+                       LYCKAT
+                    ========================= */
 
-      <div class="section-title">
+                    if (response.ok) {
 
-        <div class="eyebrow">Kontakta oss</div>
+                        successMessage.style.display =
+                            "block";
 
-        <h2>Redo att boka?</h2>
+                        submitButton.textContent =
+                            "BOKNINGSFÖRFRÅGAN SKICKAD";
 
-        <p style="color:#aaa;margin-top:10px">
-          Ring, mejla eller skicka en bokningsförfrågan.
-        </p>
 
-      </div>
+                        form.reset();
 
-      <div style="text-align:center">
 
-        <a
-          class="btn"
-          href="tel:+46731480506"
-        >
-          📞 RING 073-148 05 06
-        </a>
+                        /* Scrolla till meddelandet */
 
-        <a
-          class="btn btn-outline"
-          href="tel:+46762508703"
-          style="margin-left:8px"
-        >
-          📞 RING 076-250 87 03
-        </a>
+                        setTimeout(function() {
 
-        <a
-          class="btn btn-outline"
-          href="mailto:info.2fixauto@gmail.com"
-          style="margin-left:8px"
-        >
-          ✉️ MEJLA OSS
-        </a>
+                            successMessage.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            });
 
-      </div>
+                        }, 100);
 
-    </div>
-  </section>
 
-</main>
+                    }
 
+                    /* =========================
+                       FEL
+                    ========================= */
 
-<footer>
+                    else {
 
-  <div class="container footer-grid">
+                        throw new Error(
+                            "Formuläret kunde inte skickas."
+                        );
 
-    <div>
-      <strong style="color:#fff">2FIX AUTO UF</strong>
-      <br>
-      Bilservice & bilvård
-    </div>
+                    }
 
-    <div>
-      © <span id="year"></span> 2FIX AUTO UF
-    </div>
 
-  </div>
+                }
 
-</footer>
+                catch (error) {
 
+                    errorMessage.style.display =
+                        "block";
 
-<script>
+                    submitButton.disabled =
+                        false;
 
-  /* Årtal i sidfoten */
+                    submitButton.textContent =
+                        "SKICKA BOKNINGSFÖRFRÅGAN";
 
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
 
+                    errorMessage.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
 
-  /* Gör dagens datum till tidigaste möjliga bokningsdatum */
+                }
 
-  const dateInput = document.getElementById("date");
-
-  const today = new Date();
-
-  const yyyy = today.getFullYear();
-
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-
-  const dd = String(today.getDate()).padStart(2, "0");
-
-  dateInput.min = `${yyyy}-${mm}-${dd}`;
-
-
-  /* Bokningsformuläret */
-
-  const bookingForm =
-    document.getElementById("bookingForm");
-
-
-  bookingForm.addEventListener(
-    "submit",
-    async function(e) {
-
-      e.preventDefault();
-
-      const form = this;
-
-      const button =
-        form.querySelector("button");
-
-      const notice =
-        document.getElementById("notice");
-
-
-      button.textContent = "SKICKAR...";
-
-      button.disabled = true;
-
-
-      try {
-
-        const response = await fetch(
-          "https://formspree.io/f/mwlkwrol",
-          {
-            method: "POST",
-
-            body: new FormData(form),
-
-            headers: {
-              "Accept": "application/json"
             }
-          }
         );
 
-
-        if (response.ok) {
-
-          notice.textContent =
-            "Tack! Din bokningsförfrågan är skickad. Vi återkommer så snart som möjligt.";
-
-          notice.style.display = "block";
-
-          button.textContent =
-            "BOKNINGSFÖRFRÅGAN SKICKAD";
-
-          form.reset();
-
-          button.disabled = true;
-
-        } else {
-
-          throw new Error(
-            "Formuläret kunde inte skickas."
-          );
-
-        }
-
-      } catch (error) {
-
-        button.textContent =
-          "FÖRSÖK IGEN";
-
-        button.disabled = false;
-
-        alert(
-          "Något gick fel när bokningen skulle skickas. Försök igen."
-        );
-
-      }
-
-    }
-  );
-
-</script>
+    </script>
 
 </body>
 </html>
+
