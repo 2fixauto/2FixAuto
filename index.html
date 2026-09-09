@@ -196,6 +196,32 @@
         }
 
         /* =========================
+           PRISINFORMATION
+        ========================= */
+
+        .price-notice {
+            margin-top: 30px;
+            padding: 20px 25px;
+            background: #1a0b0b;
+            border: 2px solid #e10600;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .price-notice strong {
+            color: #e10600;
+            font-size: 20px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .price-notice p {
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* =========================
            ABOUT
         ========================= */
 
@@ -380,17 +406,23 @@
             .contact-info {
                 gap: 20px;
             }
+
+            .price-notice p {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
 
+
     <!-- =========================
          HEADER
     ========================= -->
 
     <header>
+
         <div class="nav">
 
             <div class="logo">
@@ -406,6 +438,7 @@
             </nav>
 
         </div>
+
     </header>
 
 
@@ -450,7 +483,7 @@
             <div class="services">
 
 
-                <!-- Lackskador -->
+                <!-- MINDRE LACKSKADOR -->
 
                 <div class="service-card">
 
@@ -470,7 +503,7 @@
                 </div>
 
 
-                <!-- Besiktning -->
+                <!-- BESIKTNING -->
 
                 <div class="service-card">
 
@@ -490,7 +523,7 @@
                 </div>
 
 
-                <!-- Däckbyte -->
+                <!-- DÄCKBYTE -->
 
                 <div class="service-card">
 
@@ -509,7 +542,7 @@
                 </div>
 
 
-                <!-- 3-stegs polering -->
+                <!-- POLERING -->
 
                 <div class="service-card">
 
@@ -530,6 +563,24 @@
 
 
             </div>
+
+
+            <!-- TYDLIG PRISINFORMATION -->
+
+            <div class="price-notice">
+
+                <strong>
+                    ⚠️ OBS! PRISINFORMATION
+                </strong>
+
+                <p>
+                    Från-priser kan variera beroende på bilens
+                    skick, storlek och vilket arbete som behöver
+                    utföras. Slutpris lämnas efter bedömning.
+                </p>
+
+            </div>
+
 
         </div>
 
@@ -588,7 +639,7 @@
             <form id="bookingForm">
 
 
-                <!-- Lyckat meddelande -->
+                <!-- LYCKAT MEDDELANDE -->
 
                 <div
                     class="success-message"
@@ -599,7 +650,7 @@
                 </div>
 
 
-                <!-- Felmeddelande -->
+                <!-- FELMEDDELANDE -->
 
                 <div
                     class="error-message"
@@ -610,7 +661,7 @@
                 </div>
 
 
-                <!-- Tjänst -->
+                <!-- TJÄNST -->
 
                 <label for="service">
                     Välj tjänst
@@ -645,7 +696,7 @@
                 </select>
 
 
-                <!-- Datum -->
+                <!-- DATUM -->
 
                 <label for="date">
                     Önskat datum
@@ -659,7 +710,7 @@
                 >
 
 
-                <!-- Tid -->
+                <!-- TID -->
 
                 <label for="time">
                     Önskad tid
@@ -673,7 +724,7 @@
                 >
 
 
-                <!-- Namn -->
+                <!-- NAMN -->
 
                 <label for="name">
                     Namn
@@ -688,7 +739,7 @@
                 >
 
 
-                <!-- Telefon -->
+                <!-- TELEFON -->
 
                 <label for="phone">
                     Telefonnummer
@@ -703,7 +754,7 @@
                 >
 
 
-                <!-- Meddelande -->
+                <!-- MEDDELANDE -->
 
                 <label for="message">
                     Meddelande
@@ -716,7 +767,7 @@
                 ></textarea>
 
 
-                <!-- Skicka -->
+                <!-- SKICKA -->
 
                 <button
                     type="submit"
@@ -750,7 +801,7 @@
             <div class="contact-info">
 
 
-                <!-- Telefon -->
+                <!-- TELEFON -->
 
                 <div class="contact-box">
 
@@ -773,7 +824,7 @@
                 </div>
 
 
-                <!-- E-post -->
+                <!-- E-POST -->
 
                 <div class="contact-box">
 
@@ -790,7 +841,7 @@
                 </div>
 
 
-                <!-- Ort -->
+                <!-- ORT -->
 
                 <div class="contact-box">
 
@@ -892,8 +943,6 @@
                 event.preventDefault();
 
 
-                /* Dölj gamla meddelanden */
-
                 successMessage.style.display =
                     "none";
 
@@ -901,16 +950,12 @@
                     "none";
 
 
-                /* Ändra knapp */
-
                 submitButton.disabled =
                     true;
 
                 submitButton.textContent =
                     "SKICKAR...";
 
-
-                /* Hämta formulärdata */
 
                 const formData =
                     new FormData(form);
@@ -934,10 +979,6 @@
                         );
 
 
-                    /* =========================
-                       LYCKAT
-                    ========================= */
-
                     if (response.ok) {
 
                         successMessage.style.display =
@@ -950,8 +991,6 @@
                         form.reset();
 
 
-                        /* Scrolla till meddelandet */
-
                         setTimeout(function() {
 
                             successMessage.scrollIntoView({
@@ -962,13 +1001,7 @@
                         }, 100);
 
 
-                    }
-
-                    /* =========================
-                       FEL
-                    ========================= */
-
-                    else {
+                    } else {
 
                         throw new Error(
                             "Formuläret kunde inte skickas."
@@ -977,9 +1010,7 @@
                     }
 
 
-                }
-
-                catch (error) {
+                } catch (error) {
 
                     errorMessage.style.display =
                         "block";
